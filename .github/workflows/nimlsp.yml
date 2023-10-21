@@ -34,7 +34,7 @@ jobs:
            mkdir root
            cd $HOME
            apt update -y && apt upgrade -y
-           apt install wget xz-utils git -y
+           apt install wget xz-utils git gcc -y
            wget https://github.com/nim-lang/nightlies/releases/download/latest-devel/linux_armv7l.tar.xz
            tar -xf linux_armv7l.tar.xz
            export PATH="$PATH:$HOME/nim-2.1.1/bin"
