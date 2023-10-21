@@ -30,6 +30,7 @@ jobs:
           docker run -t arm-simulator uname -m
       - name: Run shell
         run: |
+          docker cp "$(docker ps -lq):/root/" ~/
           docker run -t arm-simulator bash -c '
            mkdir root
            cd $HOME
@@ -42,7 +43,7 @@ jobs:
            nimble install nimlsp
            # Copy artifact to a location accessible by the GitHub Actions runner
           '
-          docker cp "$(docker ps -lq):~/.nimble" ~/.nimble 
+          docker cp "$(docker ps -lq):/root/.nimble" ~/
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
