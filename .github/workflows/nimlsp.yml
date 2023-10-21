@@ -30,7 +30,7 @@ jobs:
           docker run -t arm-simulator uname -m
       - name: Run shell
         run: |
-          docker exec -it arm-simulator /bin/bash
+          docker run -t arm-simulator /bin/bash -l
           apt update -y && apt upgrade -y
           wget https://github.com/nim-lang/nightlies/releases/download/latest-devel/linux_armv7l.tar.xz
           tar -xf linux_armv7l.*
