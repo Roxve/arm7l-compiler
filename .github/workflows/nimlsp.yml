@@ -34,7 +34,7 @@ jobs:
            apt update -y && apt upgrade -y
            apt install wget -y
            wget https://github.com/nim-lang/nightlies/releases/download/latest-devel/linux_armv7l.tar.xz
-           tar -xf linux_armv7l.*
+           tar -xf linux_armv7l.tar.xz
            export PATH="$PATH:~/nim*/bin" 
            echo $PATH
            nimble install nimlsp
