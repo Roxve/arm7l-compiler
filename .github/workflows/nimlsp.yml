@@ -38,4 +38,12 @@ jobs:
            export PATH="$PATH:~/nim*/bin" 
            echo $PATH
            nimble install nimlsp
+           # Copy artifact to a location accessible by the GitHub Actions runner
+           docker cp "$(docker ps -lq):~/.nimble" ~/.nimble
           '
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: nimble-artifact
+          path: ~/.nimble
