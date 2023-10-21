@@ -31,15 +31,13 @@ jobs:
       - name: Run shell
         run: |
           docker run -t arm-simulator bash -c '
+           mkdir root
+           cd $HOME
            apt update -y && apt upgrade -y
            apt install wget xz-utils -y
            wget https://github.com/nim-lang/nightlies/releases/download/latest-devel/linux_armv7l.tar.xz
            tar -xf linux_armv7l.tar.xz
-           export PATH="$PATH:$HOME/nim-2.1.1/bin" 
-           ls
-           cd nim*
-           ls
-           cd
+           export PATH="$PATH:$HOME/nim-2.1.1/bin"
            echo $PATH
            nimble install nimlsp
            # Copy artifact to a location accessible by the GitHub Actions runner
