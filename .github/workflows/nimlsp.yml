@@ -35,7 +35,7 @@ jobs:
            apt install wget xz-utils -y
            wget https://github.com/nim-lang/nightlies/releases/download/latest-devel/linux_armv7l.tar.xz
            tar -xf linux_armv7l.tar.xz
-           export PATH="$PATH:~/nim*/bin" 
+           export PATH="$PATH:$HOME/nim-2.1.1/bin" 
            echo $PATH
            nimble install nimlsp
            # Copy artifact to a location accessible by the GitHub Actions runner
