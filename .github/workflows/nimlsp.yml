@@ -27,7 +27,7 @@ jobs:
 
       - name: Run uname -m inside ARM container
         run: |
-          docker run --rm -t arm-simulator uname -m
+          docker run -t arm-simulator uname -m
       - name: Run shell
         run: |
           docker exec -it arm-simulator /bin/bash
