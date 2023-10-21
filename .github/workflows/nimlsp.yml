@@ -18,12 +18,12 @@ jobs:
 
       - name: Build and Run ARM Container
         run: |
-          echo "FROM arm64v8/ubuntu:latest" > Dockerfile.arm
+          echo "FROM arm32v7/ubuntu:latest" > Dockerfile.arm
           echo "RUN apt-get update && apt-get install -yq qemu-user-static" >> Dockerfile.arm
           echo "CMD uname -m" >> Dockerfile.arm
 
           docker buildx create --use
-          docker buildx build --platform linux/arm64 -t arm-simulator --load -f Dockerfile.arm .
+          docker buildx build --platform linux/arm/v7 -t arm-simulator --load -f Dockerfile.arm .
 
       - name: Run uname -m inside ARM container
         run: |
