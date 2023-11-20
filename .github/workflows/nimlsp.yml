@@ -35,7 +35,7 @@ jobs:
            mkdir root
            cd $HOME
            apt update -y && apt upgrade -y
-           apt install wget xz-utils git gcc -y 
+           apt install wget make cmake xz-utils git gcc -y 
            wget https://github.com/nim-lang/nightlies/releases/download/latest-devel/linux_armv7l.tar.xz
            tar -xf linux_armv7l.tar.xz 
            cd nim-2.1.1  
