@@ -43,7 +43,9 @@ jobs:
            cp bin/nimble /usr/bin
            ./install.sh /usr/bin
            # export PATH="$PATH:$HOME/nim-2.1.1/bin"
-           echo $PATH
+           echo $PATH 
+           mkdir /usr/lib/nim/lib/ 
+           cp -r /usr/lib/nim/* /usr/lib/nim/lib/
            nimble install nimlangserver
            # Copy artifact to a location accessible by the GitHub Actions runner
           '
