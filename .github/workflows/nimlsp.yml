@@ -39,7 +39,8 @@ jobs:
            wget https://github.com/nim-lang/nightlies/releases/download/latest-devel/linux_armv7l.tar.xz
            tar -xf linux_armv7l.tar.xz 
            cd nim-2.1.1  
-           chmod -R 777 *
+           chmod -R 777 * 
+           cp bin/nimble /usr/bin
            ./install.sh /usr/bin
            # export PATH="$PATH:$HOME/nim-2.1.1/bin"
            echo $PATH
