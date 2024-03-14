@@ -1,0 +1,57 @@
+name: wasmrc
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  simulate-arm:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and Run ARM Container
+        run: |
+          echo "FROM arm32v7/ubuntu:latest" > Dockerfile.arm
+          echo "RUN apt-get update && apt-get install -yq qemu-user-static" >> Dockerfile.arm
+          echo "CMD uname -m" >> Dockerfile.arm
+
+          docker buildx create --use
+          docker buildx build --platform linux/arm/v7 -t arm-simulator --load -f Dockerfile.arm .
+
+      - name: Run uname -m inside ARM container
+        run: |
+          docker run -t arm-simulator uname -m
+      - name: Run shell
+        run: |
+          docker cp "$(docker ps -lq):/root/" ~/
+          docker run -t arm-simulator bash -c '
+           mkdir root
+           cd $HOME
+           apt update -y && apt upgrade -y
+           apt install wget make cmake xz-utils git gcc -y 
+           apt install build-essential cmake g++-multilib libgcc-9-dev lib32gcc-9-dev ccache -y 
+           
+           git clone https://github.com/bytecodealliance/wasm-micro-runtime 
+           cd wasm-micro-runtime
+           cd wamr-compiler
+           ./build_llvm.sh
+           mkdir build && cd build
+           cmake ..
+           make
+           # wamrc is generated under current directory
+           # Copy artifact to a location accessible by the GitHub Actions runner
+          '
+          docker cp "$(docker ps -lq):/root/wasm-micro-runtime/wamr-compiler/build" ~/
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: wasmrc-artifact
+          path: ~/build
