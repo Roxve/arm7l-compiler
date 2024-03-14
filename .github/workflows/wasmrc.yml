@@ -35,8 +35,8 @@ jobs:
            mkdir root
            cd $HOME
            apt update -y && apt upgrade -y
-           apt install wget make xz-utils git gcc python python3 -y 
-           apt install git build-essential g++ make cmake libgcc-9-dev ccache python3 -y 
+           apt install wget make xz-utils git gcc python python3 python-pip python3-pip -y 
+           apt install git build-essential g++ make cmake libgcc-9-dev ccache python3 python-pip -y 
            
            git clone https://github.com/bytecodealliance/wasm-micro-runtime 
            cd wasm-micro-runtime
